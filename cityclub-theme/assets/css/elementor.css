@@ -1,0 +1,41 @@
+/**
+ * Elementor compatibility styles
+ */
+
+/* Fix for Elementor sections */
+.elementor-section-wrap {
+  width: 100%;
+}
+
+/* Fix for Elementor containers */
+.elementor-container {
+  max-width: 100% !important;
+}
+
+/* Fix for Elementor columns */
+.elementor-column-gap-default
+  > .elementor-row
+  > .elementor-column
+  > .elementor-element-populated,
+.elementor-column-gap-default
+  > .elementor-column
+  > .elementor-element-populated {
+  padding: 10px;
+}
+
+/* CityClub custom widgets styling */
+.elementor-widget-cityclub-hero .elementor-widget-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.elementor-widget-cityclub-activities .activity-block {
+  overflow: hidden;
+}
+
+/* Responsive fixes for Elementor */
+@media (max-width: 767px) {
+  .elementor-column {
+    width: 100% !important;
+  }
+}

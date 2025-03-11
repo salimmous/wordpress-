@@ -26,15 +26,7 @@ function cityclub_body_classes( $classes ) {
 }
 add_filter( 'body_class', 'cityclub_body_classes' );
 
-/**
- * Add a pingback url auto-discovery header for single posts, pages, or attachments.
- */
-function cityclub_pingback_header() {
-    if ( is_singular() && pings_open() ) {
-        printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
-    }
-}
-add_action( 'wp_head', 'cityclub_pingback_header' );
+// Pingback header function is already defined in functions.php
 
 /**
  * Implement custom header image

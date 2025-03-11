@@ -18,15 +18,23 @@ Tags: fitness, gym, responsive, modern
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #f26f21;
+  --secondary-color: #000000;
+  --text-color: #333333;
+  --light-color: #f8f8f8;
+  --dark-color: #222222;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: var(--text-color);
   background-color: #fff;
 }
 
 a {
-  color: #f26f21;
+  color: var(--primary-color);
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -74,15 +82,15 @@ img {
 }
 
 .site-logo span.city {
-  color: #f26f21;
+  color: var(--primary-color);
 }
 
 .site-logo span.club {
-  color: #000;
+  color: var(--secondary-color);
 }
 
 .site-logo sup {
-  color: #f26f21;
+  color: var(--primary-color);
   font-size: 14px;
 }
 
@@ -105,7 +113,7 @@ img {
 }
 
 .main-navigation a:hover {
-  color: #f26f21;
+  color: var(--primary-color);
 }
 
 .main-navigation a::after {
@@ -115,7 +123,7 @@ img {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #f26f21;
+  background-color: var(--primary-color);
   transition: width 0.3s ease;
 }
 
@@ -126,7 +134,7 @@ img {
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #f26f21;
+  background-color: var(--primary-color);
   color: #fff;
   border-radius: 4px;
   font-weight: 600;
@@ -197,7 +205,7 @@ img {
 }
 
 .hero-title span {
-  color: #f26f21;
+  color: var(--primary-color);
   display: block;
 }
 
@@ -225,7 +233,7 @@ img {
   position: absolute;
   bottom: 30px;
   right: 30px;
-  background-color: rgba(242, 111, 33, 0.9);
+  background-color: rgba(var(--primary-color), 0.9);
   padding: 15px;
   border-radius: 8px;
   color: #fff;
@@ -265,7 +273,7 @@ img {
 
 .section-subtitle {
   font-size: 18px;
-  color: #f26f21;
+  color: var(--primary-color);
   font-weight: 600;
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -361,7 +369,7 @@ img {
 .feature-icon {
   width: 24px;
   height: 24px;
-  background-color: #f26f21;
+  background-color: var(--primary-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -376,7 +384,7 @@ img {
 }
 
 .feature-content h4 {
-  color: #f26f21;
+  color: var(--primary-color);
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 5px;
@@ -388,7 +396,7 @@ img {
 
 /* Location Finder */
 .location-finder {
-  border: 2px solid #f26f21;
+  border: 2px solid var(--primary-color);
   border-radius: 8px;
   padding: 25px;
 }
@@ -400,7 +408,7 @@ img {
 }
 
 .location-finder-title span {
-  color: #f26f21;
+  color: var(--primary-color);
 }
 
 .map-container {
@@ -415,7 +423,7 @@ img {
 }
 
 .stats span {
-  color: #f26f21;
+  color: var(--primary-color);
 }
 
 /* Responsive Styles */

@@ -1,0 +1,29 @@
+/**
+ * Custom styles for Elementor editor
+ */
+
+/* CityClub brand colors for Elementor */
+:root {
+  --e-global-color-cityclub-primary: #f26f21;
+  --e-global-color-cityclub-secondary: #000000;
+  --e-global-color-cityclub-text: #333333;
+  --e-global-color-cityclub-light: #f8f8f8;
+  --e-global-color-cityclub-dark: #222222;
+}
+
+/* Add CityClub branding to editor */
+.elementor-panel .elementor-panel-category-title[data-category="cityclub"] {
+  color: #f26f21;
+  font-weight: bold;
+}
+
+/* Custom widget styles */
+.elementor-control-type-section[data-tab="cityclub"]
+  .elementor-panel-heading-title {
+  color: #f26f21;
+}
+
+/* Add some spacing to the panel */
+.elementor-panel .elementor-panel-category-items-cityclub {
+  padding: 10px 0;
+}

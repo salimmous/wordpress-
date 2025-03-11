@@ -68,6 +68,11 @@ function cityclub_scripts() {
     // Enqueue main stylesheet
     wp_enqueue_style( 'cityclub-style', get_stylesheet_uri(), array(), CITYCLUB_VERSION );
     
+    // Enqueue Elementor compatibility styles
+    if ( did_action( 'elementor/loaded' ) ) {
+        wp_enqueue_style( 'cityclub-elementor', get_template_directory_uri() . '/assets/css/elementor.css', array(), CITYCLUB_VERSION );
+    }
+    
     // Enqueue custom scripts
     wp_enqueue_script( 'cityclub-navigation', get_template_directory_uri() . '/js/navigation.js', array(), CITYCLUB_VERSION, true );
     
@@ -157,6 +162,16 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
+
+/**
+ * Implement Elementor Support.
+ */
+require get_template_directory() . '/inc/elementor-support.php';
+
+/**
+ * Implement Theme Options.
+ */
+require get_template_directory() . '/inc/theme-options.php';
 
 /**
  * Register Custom Navigation Walker
