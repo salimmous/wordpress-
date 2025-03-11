@@ -49,6 +49,7 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 			// AJAX handlers
 			add_action( 'wp_ajax_cityclub_import_demo', array( $this, 'import_demo' ) );
 			add_action( 'wp_ajax_cityclub_install_plugin', array( $this, 'install_plugin' ) );
+			add_action( 'wp_ajax_cityclub_activate_plugin', array( $this, 'activate_plugin' ) );
 		}
 
 		/**
@@ -68,7 +69,7 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 		 * Enqueue scripts
 		 */
 		public function enqueue_scripts( $hook ) {
-			if ( 'appearance_page_cityclub-demo-import' !== $hook ) {
+			if ( 'appearance_page_cityclub-demo-import' !== $hook && 'appearance_page_pt-one-click-demo-import' !== $hook ) {
 				return;
 			}
 
@@ -78,12 +79,27 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 				array(),
 				filemtime( get_template_directory() . '/assets/css/admin/demo-import.css' )
 			);
+			
+			wp_enqueue_style(
+				'cityclub-demo-content-preview',
+				get_template_directory_uri() . '/assets/css/admin/demo-content-preview.css',
+				array(),
+				filemtime( get_template_directory() . '/assets/css/admin/demo-content-preview.css' )
+			);
 
 			wp_enqueue_script(
 				'cityclub-demo-import',
 				get_template_directory_uri() . '/assets/js/admin/demo-import.js',
 				array( 'jquery' ),
 				filemtime( get_template_directory() . '/assets/js/admin/demo-import.js' ),
+				true
+			);
+			
+			wp_enqueue_script(
+				'cityclub-demo-content-preview',
+				get_template_directory_uri() . '/assets/js/admin/demo-content-preview.js',
+				array( 'jquery' ),
+				filemtime( get_template_directory() . '/assets/js/admin/demo-content-preview.js' ),
 				true
 			);
 
@@ -102,25 +118,39 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 					'error'     => __( 'Error', 'cityclub' ),
 				)
 			);
+			
+			wp_localize_script(
+				'cityclub-demo-content-preview',
+				'cityclubDemoPreview',
+				array(
+					'previewTitle' => __( 'Preview Demo Content', 'cityclub' ),
+					'previewDescription' => __( 'Here\'s a preview of what your site will look like after importing the demo content.', 'cityclub' ),
+					'homeScreenshot' => get_template_directory_uri() . '/assets/images/demo/home-preview.jpg',
+					'aboutScreenshot' => get_template_directory_uri() . '/assets/images/demo/about-preview.jpg',
+					'classesScreenshot' => get_template_directory_uri() . '/assets/images/demo/classes-preview.jpg',
+					'trainersScreenshot' => get_template_directory_uri() . '/assets/images/demo/trainers-preview.jpg',
+					'demoUrl' => 'https://demo.cityclub.ma/',
+					'viewDemoText' => __( 'View Full Demo', 'cityclub' ),
+				)
+			);
 		}
 
 		/**
 		 * Render theme page
 		 */
 		public function render_theme_page() {
-			$required_plugins = $this->get_required_plugins();
-			$all_plugins_active = $this->check_all_plugins_active( $required_plugins );
+			$plugins = $this->get_required_plugins();
 			?>
 			<div class="wrap cityclub-demo-import-wrap">
-				<h1><?php esc_html_e( 'CityClub Demo Import', 'cityclub' ); ?></h1>
+				<h1><?php esc_html_e( 'Import Demo Data', 'cityclub' ); ?></h1>
 
 				<div class="cityclub-demo-import-container">
 					<div class="cityclub-demo-import-header">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/screenshot.png' ); ?>" alt="<?php esc_attr_e( 'CityClub Demo', 'cityclub' ); ?>" class="cityclub-demo-preview">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/demo/home-preview.jpg' ); ?>" alt="<?php esc_attr_e( 'Demo Preview', 'cityclub' ); ?>" class="cityclub-demo-preview">
 						<div class="cityclub-demo-import-header-content">
-							<h2><?php esc_html_e( 'CityClub Fitness Network', 'cityclub' ); ?></h2>
-							<p><?php esc_html_e( 'Import the demo content to make your site look like our demo. This will import posts, pages, images, theme options, widgets, menus and more.', 'cityclub' ); ?></p>
-							<p><strong><?php esc_html_e( 'Important:', 'cityclub' ); ?></strong> <?php esc_html_e( 'Demo import is recommended for new websites. Importing demo content to an existing website may cause conflicts with current content.', 'cityclub' ); ?></p>
+							<h2><?php esc_html_e( 'CityClub Demo Import', 'cityclub' ); ?></h2>
+							<p><?php esc_html_e( 'This will import the complete demo content including all pages with their designs, styles, and sections. Your site will look exactly like the demo.', 'cityclub' ); ?></p>
+							<p><strong><?php esc_html_e( 'Important:', 'cityclub' ); ?></strong> <?php esc_html_e( 'The import process may take a few minutes. Please be patient and do not close this page until the import is complete.', 'cityclub' ); ?></p>
 						</div>
 					</div>
 
@@ -129,27 +159,25 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 						<p><?php esc_html_e( 'The following plugins are required for the demo import. Please install and activate them before importing the demo content.', 'cityclub' ); ?></p>
 
 						<ul class="cityclub-plugin-list">
-							<?php foreach ( $required_plugins as $plugin ) : ?>
+							<?php foreach ( $plugins as $plugin ) : ?>
 								<li class="cityclub-plugin-item" data-slug="<?php echo esc_attr( $plugin['slug'] ); ?>">
-									<span class="cityclub-plugin-name"><?php echo esc_html( $plugin['name'] ); ?></span>
-									<span class="cityclub-plugin-status">
-										<?php if ( $plugin['active'] ) : ?>
-											<span class="cityclub-plugin-status-active"><?php esc_html_e( 'Active', 'cityclub' ); ?></span>
-										<?php elseif ( $plugin['installed'] ) : ?>
+									<div class="cityclub-plugin-name"><?php echo esc_html( $plugin['name'] ); ?></div>
+									<div class="cityclub-plugin-status">
+										<?php if ( $plugin['is_active'] ) : ?>
+											<span class="cityclub-plugin-status-active"><?php esc_html_e( 'Activated', 'cityclub' ); ?></span>
+										<?php elseif ( $plugin['is_installed'] ) : ?>
 											<button class="button cityclub-activate-plugin" data-plugin="<?php echo esc_attr( $plugin['file'] ); ?>"><?php esc_html_e( 'Activate', 'cityclub' ); ?></button>
 										<?php else : ?>
 											<button class="button cityclub-install-plugin"><?php esc_html_e( 'Install', 'cityclub' ); ?></button>
 										<?php endif; ?>
-									</span>
+									</div>
 								</li>
 							<?php endforeach; ?>
 						</ul>
 					</div>
 
 					<div class="cityclub-demo-import-actions">
-						<button class="button button-primary cityclub-import-demo-button" <?php echo $all_plugins_active ? '' : 'disabled'; ?>>
-							<?php esc_html_e( 'Import Demo Content', 'cityclub' ); ?>
-						</button>
+						<button class="button button-primary cityclub-import-demo-button" <?php echo $this->all_plugins_active( $plugins ) ? '' : 'disabled'; ?>><?php esc_html_e( 'Import Demo Content', 'cityclub' ); ?></button>
 						<div class="cityclub-import-progress" style="display: none;">
 							<div class="cityclub-import-progress-bar"></div>
 							<div class="cityclub-import-progress-message"><?php esc_html_e( 'Importing...', 'cityclub' ); ?></div>
@@ -163,60 +191,65 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 		/**
 		 * Get required plugins
 		 *
-		 * @return array
+		 * @return array Required plugins
 		 */
 		public function get_required_plugins() {
 			$plugins = array(
 				array(
-					'name'      => 'Elementor Page Builder',
-					'slug'      => 'elementor',
-					'file'      => 'elementor/elementor.php',
-					'required'  => true,
+					'name'         => 'Elementor Page Builder',
+					'slug'         => 'elementor',
+					'file'         => 'elementor/elementor.php',
+					'is_installed' => false,
+					'is_active'    => false,
 				),
 				array(
-					'name'      => 'Contact Form 7',
-					'slug'      => 'contact-form-7',
-					'file'      => 'contact-form-7/wp-contact-form-7.php',
-					'required'  => true,
+					'name'         => 'Contact Form 7',
+					'slug'         => 'contact-form-7',
+					'file'         => 'contact-form-7/wp-contact-form-7.php',
+					'is_installed' => false,
+					'is_active'    => false,
 				),
 				array(
-					'name'      => 'Advanced Custom Fields',
-					'slug'      => 'advanced-custom-fields',
-					'file'      => 'advanced-custom-fields/acf.php',
-					'required'  => true,
+					'name'         => 'Advanced Custom Fields',
+					'slug'         => 'advanced-custom-fields',
+					'file'         => 'advanced-custom-fields/acf.php',
+					'is_installed' => false,
+					'is_active'    => false,
 				),
 				array(
-					'name'      => 'WP Google Maps',
-					'slug'      => 'wp-google-maps',
-					'file'      => 'wp-google-maps/wpGoogleMaps.php',
-					'required'  => true,
+					'name'         => 'WP Google Maps',
+					'slug'         => 'wp-google-maps',
+					'file'         => 'wp-google-maps/wpGoogleMaps.php',
+					'is_installed' => false,
+					'is_active'    => false,
 				),
 				array(
-					'name'      => 'One Click Demo Import',
-					'slug'      => 'one-click-demo-import',
-					'file'      => 'one-click-demo-import/one-click-demo-import.php',
-					'required'  => true,
+					'name'         => 'One Click Demo Import',
+					'slug'         => 'one-click-demo-import',
+					'file'         => 'one-click-demo-import/one-click-demo-import.php',
+					'is_installed' => false,
+					'is_active'    => false,
 				),
 			);
 
 			// Check if plugins are installed and active
 			foreach ( $plugins as $key => $plugin ) {
-				$plugins[ $key ]['installed'] = $this->is_plugin_installed( $plugin['file'] );
-				$plugins[ $key ]['active']    = is_plugin_active( $plugin['file'] );
+				$plugins[ $key ]['is_installed'] = $this->is_plugin_installed( $plugin['file'] );
+				$plugins[ $key ]['is_active']    = is_plugin_active( $plugin['file'] );
 			}
 
 			return $plugins;
 		}
 
 		/**
-		 * Check if all required plugins are active
+		 * Check if all plugins are active
 		 *
-		 * @param array $plugins Plugins array
-		 * @return bool
+		 * @param array $plugins Plugins
+		 * @return bool True if all plugins are active
 		 */
-		public function check_all_plugins_active( $plugins ) {
+		public function all_plugins_active( $plugins ) {
 			foreach ( $plugins as $plugin ) {
-				if ( ! $plugin['active'] ) {
+				if ( ! $plugin['is_active'] ) {
 					return false;
 				}
 			}
@@ -228,7 +261,7 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 		 * Check if plugin is installed
 		 *
 		 * @param string $file Plugin file
-		 * @return bool
+		 * @return bool True if plugin is installed
 		 */
 		public function is_plugin_installed( $file ) {
 			$installed_plugins = get_plugins();
@@ -241,29 +274,30 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 		 */
 		public function install_plugin() {
 			// Check nonce
-			check_ajax_referer( 'cityclub-demo-import', 'nonce' );
+			if ( ! check_ajax_referer( 'cityclub-demo-import', 'nonce', false ) ) {
+				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cityclub' ) ) );
+			}
 
-			// Check user capabilities
+			// Check capabilities
 			if ( ! current_user_can( 'install_plugins' ) ) {
-				wp_send_json_error( array(
-					'message' => __( 'You do not have permission to install plugins.', 'cityclub' ),
-				) );
+				wp_send_json_error( array( 'message' => __( 'You do not have permission to install plugins.', 'cityclub' ) ) );
 			}
 
 			// Get plugin slug
 			$slug = isset( $_POST['slug'] ) ? sanitize_text_field( wp_unslash( $_POST['slug'] ) ) : '';
 
 			if ( empty( $slug ) ) {
-				wp_send_json_error( array(
-					'message' => __( 'Plugin slug is required.', 'cityclub' ),
-				) );
+				wp_send_json_error( array( 'message' => __( 'Invalid plugin slug.', 'cityclub' ) ) );
 			}
 
-			// Include necessary files
-			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-			require_once ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php';
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			// Include plugin installer
+			if ( ! function_exists( 'plugins_api' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+			}
+
+			if ( ! class_exists( 'WP_Upgrader' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+			}
 
 			// Get plugin info
 			$api = plugins_api(
@@ -288,9 +322,7 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 			);
 
 			if ( is_wp_error( $api ) ) {
-				wp_send_json_error( array(
-					'message' => $api->get_error_message(),
-				) );
+				wp_send_json_error( array( 'message' => $api->get_error_message() ) );
 			}
 
 			// Install plugin
@@ -298,46 +330,67 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 			$result   = $upgrader->install( $api->download_link );
 
 			if ( is_wp_error( $result ) ) {
-				wp_send_json_error( array(
-					'message' => $result->get_error_message(),
-				) );
+				wp_send_json_error( array( 'message' => $result->get_error_message() ) );
+			}
+
+			if ( is_wp_error( $upgrader->skin->result ) ) {
+				wp_send_json_error( array( 'message' => $upgrader->skin->result->get_error_message() ) );
+			}
+
+			if ( $upgrader->skin->get_errors()->has_errors() ) {
+				wp_send_json_error( array( 'message' => $upgrader->skin->get_error_messages() ) );
 			}
 
 			if ( false === $result ) {
-				wp_send_json_error( array(
-					'message' => __( 'Plugin installation failed.', 'cityclub' ),
-				) );
+				wp_send_json_error( array( 'message' => __( 'Plugin installation failed.', 'cityclub' ) ) );
 			}
 
 			// Get plugin file
-			$plugin_file = false;
-			$plugin_info = $this->get_required_plugins();
+			$plugin_file = $this->get_plugin_file( $slug );
 
-			foreach ( $plugin_info as $plugin ) {
-				if ( $plugin['slug'] === $slug ) {
-					$plugin_file = $plugin['file'];
-					break;
-				}
-			}
-
-			if ( ! $plugin_file ) {
-				wp_send_json_error( array(
-					'message' => __( 'Plugin file not found.', 'cityclub' ),
-				) );
+			if ( empty( $plugin_file ) ) {
+				wp_send_json_error( array( 'message' => __( 'Plugin file not found.', 'cityclub' ) ) );
 			}
 
 			// Activate plugin
 			$activate = activate_plugin( $plugin_file );
 
 			if ( is_wp_error( $activate ) ) {
-				wp_send_json_error( array(
-					'message' => $activate->get_error_message(),
-				) );
+				wp_send_json_error( array( 'message' => $activate->get_error_message() ) );
 			}
 
-			wp_send_json_success( array(
-				'message' => __( 'Plugin installed and activated successfully.', 'cityclub' ),
-			) );
+			wp_send_json_success();
+		}
+
+		/**
+		 * Activate plugin
+		 */
+		public function activate_plugin() {
+			// Check nonce
+			if ( ! check_ajax_referer( 'cityclub-demo-import', 'nonce', false ) ) {
+				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cityclub' ) ) );
+			}
+
+			// Check capabilities
+			if ( ! current_user_can( 'activate_plugins' ) ) {
+				wp_send_json_error( array( 'message' => __( 'You do not have permission to activate plugins.', 'cityclub' ) ) );
+			}
+
+			// Get plugin file
+			$plugin = isset( $_POST['plugin'] ) ? sanitize_text_field( wp_unslash( $_POST['plugin'] ) ) : '';
+
+			if ( empty( $plugin ) ) {
+				wp_send_json_error( array( 'message' => __( 'Invalid plugin file.', 'cityclub' ) ) );
+			}
+
+			// Activate plugin
+			$activate = activate_plugin( $plugin );
+
+			if ( is_wp_error( $activate ) ) {
+				wp_send_json_error( array( 'message' => $activate->get_error_message() ) );
+			}
+
+			wp_send_json_success();
 		}
 
 		/**
@@ -345,28 +398,68 @@ if ( ! class_exists( 'CityClub_Demo_Importer' ) ) :
 		 */
 		public function import_demo() {
 			// Check nonce
-			check_ajax_referer( 'cityclub-demo-import', 'nonce' );
+			if ( ! check_ajax_referer( 'cityclub-demo-import', 'nonce', false ) ) {
+				wp_send_json_error( array( 'message' => __( 'Invalid nonce.', 'cityclub' ) ) );
+			}
 
-			// Check user capabilities
+			// Check capabilities
 			if ( ! current_user_can( 'import' ) ) {
-				wp_send_json_error( array(
-					'message' => __( 'You do not have permission to import content.', 'cityclub' ),
-				) );
+				wp_send_json_error( array( 'message' => __( 'You do not have permission to import content.', 'cityclub' ) ) );
 			}
 
 			// Check if One Click Demo Import is active
 			if ( ! class_exists( 'OCDI_Plugin' ) ) {
-				wp_send_json_error( array(
-					'message' => __( 'One Click Demo Import plugin is required.', 'cityclub' ),
-				) );
+				wp_send_json_error( array( 'message' => __( 'One Click Demo Import plugin is not active.', 'cityclub' ) ) );
 			}
 
-			// Trigger demo import
-			do_action( 'ocdi/import_demo_data', 0 );
+			// Import demo content
+			try {
+				// Get demo import files
+				$import_files = apply_filters( 'ocdi/import_files', array() );
 
-			wp_send_json_success( array(
-				'message' => __( 'Demo content imported successfully.', 'cityclub' ),
-			) );
+				if ( empty( $import_files ) ) {
+					wp_send_json_error( array( 'message' => __( 'No demo import files defined.', 'cityclub' ) ) );
+				}
+
+				// Import content, widgets and customizer settings
+				$ocdi = OCDI_Plugin::get_instance();
+				$ocdi->append_to_frontend_error_messages( __( 'Importing demo content...', 'cityclub' ) );
+				$ocdi->import_content( $import_files[0] );
+				$ocdi->append_to_frontend_error_messages( __( 'Importing widgets...', 'cityclub' ) );
+				$ocdi->import_widgets( $import_files[0] );
+				$ocdi->append_to_frontend_error_messages( __( 'Importing customizer settings...', 'cityclub' ) );
+				$ocdi->import_customizer_data( $import_files[0] );
+				$ocdi->append_to_frontend_error_messages( __( 'Importing Redux settings...', 'cityclub' ) );
+				$ocdi->import_redux_data( $import_files[0] );
+
+				// Run after import action
+				$ocdi->append_to_frontend_error_messages( __( 'Finalizing import...', 'cityclub' ) );
+				do_action( 'ocdi/after_import', $import_files[0] );
+
+				wp_send_json_success();
+			} catch ( Exception $e ) {
+				wp_send_json_error( array( 'message' => $e->getMessage() ) );
+			}
+		}
+
+		/**
+		 * Get plugin file from slug
+		 *
+		 * @param string $slug Plugin slug
+		 * @return string Plugin file
+		 */
+		public function get_plugin_file( $slug ) {
+			$plugins = get_plugins();
+
+			foreach ( $plugins as $plugin_file => $plugin_data ) {
+				$path_parts = explode( '/', $plugin_file );
+
+				if ( $path_parts[0] === $slug ) {
+					return $plugin_file;
+				}
+			}
+
+			return '';
 		}
 	}
 
