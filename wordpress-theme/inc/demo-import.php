@@ -52,8 +52,8 @@ function cityclub_demo_import_page() {
                 <div class="cityclub-demo-preview">
                     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/demo/home-preview.jpg'); ?>" alt="<?php esc_attr_e('Main Demo', 'cityclub-modern'); ?>">
                     <div class="cityclub-demo-actions">
-                        <a href="https://cityclub.ma/demo" target="_blank" class="button"><?php esc_html_e('Preview', 'cityclub-modern'); ?></a>
-                        <button class="button button-primary cityclub-import-demo-button" data-demo-id="main"><?php esc_html_e('Import', 'cityclub-modern'); ?></button>
+                        <a href="#" onclick="alert('Demo preview will be available after theme activation'); return false;" class="button"><?php esc_html_e('Preview', 'cityclub-modern'); ?></a>
+                        <button class="button button-primary cityclub-import-demo-button" data-demo-id="main"><?php esc_html_e('Import Demo', 'cityclub-modern'); ?></button>
                     </div>
                 </div>
                 <h3><?php esc_html_e('Main Demo', 'cityclub-modern'); ?></h3>
@@ -65,8 +65,8 @@ function cityclub_demo_import_page() {
                 <div class="cityclub-demo-preview">
                     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/demo/about-preview.jpg'); ?>" alt="<?php esc_attr_e('Dark Demo', 'cityclub-modern'); ?>">
                     <div class="cityclub-demo-actions">
-                        <a href="https://cityclub.ma/demo-dark" target="_blank" class="button"><?php esc_html_e('Preview', 'cityclub-modern'); ?></a>
-                        <button class="button button-primary cityclub-import-demo-button" data-demo-id="dark"><?php esc_html_e('Import', 'cityclub-modern'); ?></button>
+                        <a href="#" onclick="alert('Demo preview will be available after theme activation'); return false;" class="button"><?php esc_html_e('Preview', 'cityclub-modern'); ?></a>
+                        <button class="button button-primary cityclub-import-demo-button" data-demo-id="dark"><?php esc_html_e('Import Demo', 'cityclub-modern'); ?></button>
                     </div>
                 </div>
                 <h3><?php esc_html_e('Dark Demo', 'cityclub-modern'); ?></h3>
@@ -78,8 +78,8 @@ function cityclub_demo_import_page() {
                 <div class="cityclub-demo-preview">
                     <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/demo/classes-preview.jpg'); ?>" alt="<?php esc_attr_e('Lady Demo', 'cityclub-modern'); ?>">
                     <div class="cityclub-demo-actions">
-                        <a href="https://cityclub.ma/demo-lady" target="_blank" class="button"><?php esc_html_e('Preview', 'cityclub-modern'); ?></a>
-                        <button class="button button-primary cityclub-import-demo-button" data-demo-id="lady"><?php esc_html_e('Import', 'cityclub-modern'); ?></button>
+                        <a href="#" onclick="alert('Demo preview will be available after theme activation'); return false;" class="button"><?php esc_html_e('Preview', 'cityclub-modern'); ?></a>
+                        <button class="button button-primary cityclub-import-demo-button" data-demo-id="lady"><?php esc_html_e('Import Demo', 'cityclub-modern'); ?></button>
                     </div>
                 </div>
                 <h3><?php esc_html_e('Lady Demo', 'cityclub-modern'); ?></h3>

@@ -156,3 +156,10 @@ if (file_exists(get_template_directory() . '/inc/class-wp-bootstrap-navwalker.ph
 if (file_exists(get_template_directory() . '/inc/demo-import.php')) {
     require get_template_directory() . '/inc/demo-import.php';
 }
+
+/**
+ * Demo Content Preview
+ */
+if (file_exists(get_template_directory() . '/inc/demo-content.php')) {
+    require get_template_directory() . '/inc/demo-content.php';
+}
