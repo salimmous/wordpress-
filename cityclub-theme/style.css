@@ -1,0 +1,518 @@
+/*
+Theme Name: CityClub Fitness Network
+Theme URI: https://cityclub.ma
+Author: Your Name
+Author URI: https://yourwebsite.com
+Description: A custom WordPress theme for CityClub fitness network with 20+ gym locations across Morocco.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cityclub
+Tags: fitness, gym, responsive, modern
+*/
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+}
+
+a {
+  color: #f26f21;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #d85a12;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header Styles */
+.site-header {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.site-branding {
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.site-logo span.city {
+  color: #f26f21;
+}
+
+.site-logo span.club {
+  color: #000;
+}
+
+.site-logo sup {
+  color: #f26f21;
+  font-size: 14px;
+}
+
+/* Navigation */
+.main-navigation ul {
+  display: flex;
+  list-style: none;
+}
+
+.main-navigation li {
+  margin-left: 20px;
+}
+
+.main-navigation a {
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 0;
+  position: relative;
+}
+
+.main-navigation a:hover {
+  color: #f26f21;
+}
+
+.main-navigation a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #f26f21;
+  transition: width 0.3s ease;
+}
+
+.main-navigation a:hover::after {
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f26f21;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #d85a12;
+  color: #fff;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 600px;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  max-width: 600px;
+  padding: 0 15px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-title span {
+  color: #f26f21;
+  display: block;
+}
+
+.hero-description {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid #fff;
+}
+
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.promo-badge {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background-color: rgba(242, 111, 33, 0.9);
+  padding: 15px;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  z-index: 3;
+}
+
+.promo-badge-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.promo-badge-subtitle {
+  font-size: 18px;
+}
+
+.promo-badge-text {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Club Showcase Section */
+.section {
+  padding: 80px 0;
+}
+
+.section-gray {
+  background-color: #f8f8f8;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: #f26f21;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.section-description {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.club-image {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Activities Section */
+.activity-section {
+  padding: 0;
+}
+
+.activity-block {
+  padding: 80px 0;
+  color: #fff;
+}
+
+.activity-blue {
+  background-color: #1a73e8;
+}
+.activity-red {
+  background-color: #ea4335;
+}
+.activity-green {
+  background-color: #34a853;
+}
+.activity-pink {
+  background-color: #e83e8c;
+}
+.activity-yellow {
+  background-color: #fbbc05;
+}
+.activity-purple {
+  background-color: #673ab7;
+}
+
+.activity-image {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 400px;
+}
+
+.activity-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.activity-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-name {
+  font-size: 48px;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* Coaches Section */
+.coach-feature {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.feature-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #f26f21;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.feature-icon span {
+  color: #fff;
+  font-size: 12px;
+}
+
+.feature-content h4 {
+  color: #f26f21;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.feature-content p {
+  color: #666;
+}
+
+/* Location Finder */
+.location-finder {
+  border: 2px solid #f26f21;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.location-finder-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.location-finder-title span {
+  color: #f26f21;
+}
+
+.map-container {
+  height: 300px;
+  margin-bottom: 20px;
+}
+
+.stats {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.stats span {
+  color: #f26f21;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 30px;
+  }
+
+  .activity-name {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .main-navigation {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .main-navigation.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .main-navigation ul {
+    flex-direction: column;
+  }
+
+  .main-navigation li {
+    margin: 10px 0;
+    margin-left: 0;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-section {
+    height: 500px;
+  }
+
+  .promo-badge {
+    bottom: 15px;
+    right: 15px;
+    padding: 10px;
+  }
+
+  .promo-badge-title {
+    font-size: 20px;
+  }
+
+  .promo-badge-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .section {
+    padding: 50px 0;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .activity-name {
+    font-size: 28px;
+  }
+}
