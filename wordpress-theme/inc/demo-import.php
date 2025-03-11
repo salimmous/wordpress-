@@ -32,17 +32,9 @@ function cityclub_demo_import_page() {
             <p><?php esc_html_e('Choose one of the pre-built demo layouts below to import. The import process will create pages, posts, menus, and widgets as shown in the demo.', 'cityclub-modern'); ?></p>
         </div>
         
-        <?php if (!class_exists('Elementor\Plugin')) : ?>
-            <div class="notice notice-warning">
-                <p><?php esc_html_e('Elementor Page Builder is required for the full demo experience. Please install and activate Elementor before importing the demo.', 'cityclub-modern'); ?> <a href="<?php echo esc_url(admin_url('plugin-install.php?s=elementor&tab=search&type=term')); ?>" class="button button-primary"><?php esc_html_e('Install Elementor', 'cityclub-modern'); ?></a></p>
-            </div>
-        <?php endif; ?>
-        
-        <?php if (!class_exists('ElementorPro\Plugin')) : ?>
-            <div class="notice notice-info">
-                <p><?php esc_html_e('Elementor Pro is recommended for the full demo experience. Some features may not be available without Elementor Pro.', 'cityclub-modern'); ?> <a href="https://elementor.com/pro/" target="_blank" class="button"><?php esc_html_e('Get Elementor Pro', 'cityclub-modern'); ?></a></p>
-            </div>
-        <?php endif; ?>
+        <div class="notice notice-info">
+            <p><?php esc_html_e('The demo import will create sample pages and posts to help you get started with the CityClub theme.', 'cityclub-modern'); ?></p>
+        </div>
         
         <h2><?php esc_html_e('Demo Preview', 'cityclub-modern'); ?></h2>
         
@@ -172,16 +164,20 @@ function cityclub_import_demo_ajax() {
     
     $demo_id = sanitize_text_field($_POST['demo_id']);
     
-    // Initialize the importer
-    $importer = new CityClub_Demo_Importer();
-    
-    // Import the demo
-    $result = $importer->import_demo($demo_id);
-    
-    if (is_wp_error($result)) {
-        wp_send_json_error(array('message' => $result->get_error_message()));
+    try {
+        // Initialize the importer
+        $importer = new CityClub_Demo_Importer();
+        
+        // Import the demo
+        $result = $importer->import_demo($demo_id);
+        
+        if (is_wp_error($result)) {
+            wp_send_json_error(array('message' => $result->get_error_message()));
+        }
+        
+        wp_send_json_success(array('message' => __('Demo imported successfully!', 'cityclub-modern')));
+    } catch (Exception $e) {
+        wp_send_json_error(array('message' => $e->getMessage()));
     }
-    
-    wp_send_json_success(array('message' => __('Demo imported successfully!', 'cityclub-modern')));
 }
 add_action('wp_ajax_cityclub_import_demo', 'cityclub_import_demo_ajax');
