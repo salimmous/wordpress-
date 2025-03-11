@@ -10,6 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Include demo content functions
+require get_template_directory() . '/inc/demo-content.php';
+
 /**
  * Demo Import Setup
  */
@@ -30,8 +33,27 @@ function cityclub_demo_import_setup() {
 
 	// Change the location of the demo import files
 	add_filter( 'ocdi/upload_file_path', 'cityclub_upload_file_path' );
+	
+	// Modify plugin intro text
+	add_filter( 'ocdi/plugin_intro_text', 'cityclub_plugin_intro_text' );
+	
+	// Enable the option to overwrite existing content
+	add_filter( 'ocdi/enable_custom_menu_items_check', '__return_true' );
 }
 add_action( 'after_setup_theme', 'cityclub_demo_import_setup' );
+
+/**
+ * Modify plugin intro text
+ */
+function cityclub_plugin_intro_text( $default_text ) {
+	$custom_text = '<div class="ocdi__intro-text">';
+	$custom_text .= '<h2>' . esc_html__( 'CityClub Demo Import', 'cityclub' ) . '</h2>';
+	$custom_text .= '<p>' . esc_html__( 'This will import the complete demo content including all pages with their designs, styles, and sections. Your site will look exactly like the demo.', 'cityclub' ) . '</p>';
+	$custom_text .= '<p><strong>' . esc_html__( 'Important:', 'cityclub' ) . '</strong> ' . esc_html__( 'The import process may take a few minutes. Please be patient and do not close this page until the import is complete.', 'cityclub' ) . '</p>';
+	$custom_text .= '</div>';
+	
+	return $custom_text;
+}
 
 /**
  * Define demo import files
@@ -43,8 +65,15 @@ function cityclub_demo_import_files() {
 			'import_file_url'            => 'https://cityclub.ma/demo-content/demo-content.xml',
 			'import_widget_file_url'     => 'https://cityclub.ma/demo-content/widgets.json',
 			'import_customizer_file_url' => 'https://cityclub.ma/demo-content/customizer.dat',
+			'import_redux'               => array(
+				array(
+					'file_url'    => 'https://cityclub.ma/demo-content/redux.json',
+					'option_name' => 'cityclub_options',
+				),
+			),
 			'import_preview_image_url'   => 'https://cityclub.ma/demo-content/preview.jpg',
 			'preview_url'               => 'https://demo.cityclub.ma/',
+			'import_notice'              => __( 'After importing this demo, you will have all pages with complete designs, styles and sections ready to use.', 'cityclub' ),
 		),
 	);
 }
@@ -57,10 +86,12 @@ function cityclub_after_import_setup() {
 	$main_menu = get_term_by( 'name', 'Main Menu', 'nav_menu' );
 	$footer_menu = get_term_by( 'name', 'Footer Menu', 'nav_menu' );
 
-	set_theme_mod( 'nav_menu_locations', array(
-		'primary' => $main_menu->term_id,
-		'footer'  => $footer_menu->term_id,
-	) );
+	if ( $main_menu && $footer_menu ) {
+		set_theme_mod( 'nav_menu_locations', array(
+			'primary' => $main_menu->term_id,
+			'footer'  => $footer_menu->term_id,
+		) );
+	}
 
 	// Assign front page and posts page
 	$front_page = get_page_by_title( 'Home' );
@@ -80,9 +111,18 @@ function cityclub_after_import_setup() {
 
 	// Update ACF field groups
 	cityclub_update_acf_fields();
+	
+	// Import all Elementor templates
+	cityclub_import_elementor_templates();
+	
+	// Create additional demo pages if they don't exist
+	cityclub_create_demo_pages();
 
 	// Flush rewrite rules
 	flush_rewrite_rules();
+	
+	// Show success message
+	add_action( 'admin_notices', 'cityclub_import_success_notice' );
 }
 
 /**
@@ -97,6 +137,11 @@ function cityclub_import_elementor_settings() {
 	update_option( 'elementor_disable_color_schemes', 'yes' );
 	update_option( 'elementor_disable_typography_schemes', 'yes' );
 	update_option( 'elementor_container_width', 1200 );
+	update_option( 'elementor_page_title_selector', '.entry-title' );
+	update_option( 'elementor_viewport_lg', 1025 );
+	update_option( 'elementor_viewport_md', 768 );
+	update_option( 'elementor_global_image_lightbox', 'yes' );
+	update_option( 'elementor_space_between_widgets', '20' );
 
 	// Add default Elementor colors
 	$elementor_colors = array(
@@ -108,6 +153,28 @@ function cityclub_import_elementor_settings() {
 	);
 
 	update_option( 'elementor_scheme_color', $elementor_colors );
+	
+	// Add default typography
+	$elementor_typography = array(
+		1 => array(
+			'font_family' => 'Poppins',
+			'font_weight' => '700',
+		),
+		2 => array(
+			'font_family' => 'Poppins',
+			'font_weight' => '600',
+		),
+		3 => array(
+			'font_family' => 'Poppins',
+			'font_weight' => '500',
+		),
+		4 => array(
+			'font_family' => 'Poppins',
+			'font_weight' => '400',
+		),
+	);
+	
+	update_option( 'elementor_scheme_typography', $elementor_typography );
 }
 
 /**
