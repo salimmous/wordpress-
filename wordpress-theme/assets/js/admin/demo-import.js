@@ -25,9 +25,7 @@
       $(".cityclub-import-progress").show();
       $(".cityclub-import-complete").hide();
       $(".cityclub-import-error").hide();
-      $(".cityclub-import-progress-message").text(
-        cityclubDemoImport.importingText,
-      );
+      $(".cityclub-import-progress-message").text(cityclubDemoImport.importing);
 
       // Show modal
       $(".cityclub-import-modal").show();

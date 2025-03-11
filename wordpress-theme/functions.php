@@ -111,34 +111,48 @@ add_action('wp_enqueue_scripts', 'cityclub_scripts');
 /**
  * Custom template tags for this theme.
  */
-require get_template_directory() . '/inc/template-tags.php';
+if (file_exists(get_template_directory() . '/inc/template-tags.php')) {
+    require get_template_directory() . '/inc/template-tags.php';
+}
 
 /**
  * Functions which enhance the theme by hooking into WordPress.
  */
-require get_template_directory() . '/inc/template-functions.php';
+if (file_exists(get_template_directory() . '/inc/template-functions.php')) {
+    require get_template_directory() . '/inc/template-functions.php';
+}
 
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer.php';
+if (file_exists(get_template_directory() . '/inc/customizer.php')) {
+    require get_template_directory() . '/inc/customizer.php';
+}
 
 /**
  * Custom Post Types
  */
-require get_template_directory() . '/inc/custom-post-types.php';
+if (file_exists(get_template_directory() . '/inc/custom-post-types.php')) {
+    require get_template_directory() . '/inc/custom-post-types.php';
+}
 
 /**
  * Theme Options
  */
-require get_template_directory() . '/inc/theme-options.php';
+if (file_exists(get_template_directory() . '/inc/theme-options.php')) {
+    require get_template_directory() . '/inc/theme-options.php';
+}
 
 /**
  * Bootstrap Nav Walker
  */
-require get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';
+if (file_exists(get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php')) {
+    require get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';
+}
 
 /**
  * Demo Import
  */
-require get_template_directory() . '/inc/demo-import.php';
+if (file_exists(get_template_directory() . '/inc/demo-import.php')) {
+    require get_template_directory() . '/inc/demo-import.php';
+}
