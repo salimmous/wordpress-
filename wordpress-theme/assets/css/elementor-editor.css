@@ -1,0 +1,130 @@
+/**
+ * CityClub Elementor Editor Styles
+ */
+
+/* CityClub Widget Category Icon */
+.elementor-panel .elementor-element .icon i.cityclub-icon:before {
+  content: "\f44b"; /* Font Awesome dumbbell icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+
+/* CityClub Widget Category */
+.elementor-panel
+  .elementor-element-wrapper
+  .elementor-element[data-element_type="cityclub_hero"]
+  .icon,
+.elementor-panel
+  .elementor-element-wrapper
+  .elementor-element[data-element_type="cityclub_stats"]
+  .icon,
+.elementor-panel
+  .elementor-element-wrapper
+  .elementor-element[data-element_type="cityclub_activities"]
+  .icon,
+.elementor-panel
+  .elementor-element-wrapper
+  .elementor-element[data-element_type="cityclub_membership"]
+  .icon,
+.elementor-panel
+  .elementor-element-wrapper
+  .elementor-element[data-element_type="cityclub_coaches"]
+  .icon,
+.elementor-panel
+  .elementor-element-wrapper
+  .elementor-element[data-element_type="cityclub_testimonials"]
+  .icon,
+.elementor-panel
+  .elementor-element-wrapper
+  .elementor-element[data-element_type="cityclub_club_map"]
+  .icon {
+  background-color: #f26f21;
+  color: #fff;
+}
+
+/* CityClub Widget Preview */
+.elementor-editor-active .cityclub-widget-preview {
+  position: relative;
+}
+
+.elementor-editor-active .cityclub-widget-preview:before {
+  content: "CityClub Widget";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f26f21;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  z-index: 9999;
+}
+
+/* CityClub Color Scheme */
+.elementor-panel .elementor-tab-control-style.elementor-active {
+  border-bottom-color: #f26f21;
+}
+
+.elementor-panel .elementor-control-type-slider .elementor-slider .noUi-handle {
+  background-color: #f26f21;
+}
+
+.elementor-panel .elementor-control-type-dimensions li:hover {
+  background-color: #f26f21;
+}
+
+/* CityClub Custom Controls */
+.elementor-control-cityclub_custom_control .elementor-control-title {
+  color: #f26f21;
+  font-weight: bold;
+}
+
+/* CityClub Template Library */
+.elementor-template-library-template-cityclub
+  .elementor-template-library-template-body {
+  position: relative;
+}
+
+.elementor-template-library-template-cityclub
+  .elementor-template-library-template-body:before {
+  content: "CityClub";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #f26f21;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* CityClub Responsive Preview */
+.elementor-device-desktop #elementor-preview-responsive-wrapper {
+  border-color: #f26f21;
+}
+
+/* CityClub Widget Help Text */
+.elementor-control-cityclub_widget_help .elementor-control-content {
+  background-color: #f26f21;
+  color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+/* CityClub Widget Icons */
+.elementor-control-type-icons
+  .elementor-control-icons-list
+  .elementor-control-icon.selected {
+  border-color: #f26f21;
+}
+
+/* CityClub Widget Buttons */
+.elementor-panel .elementor-button.elementor-button-success {
+  background-color: #f26f21;
+}
+
+.elementor-panel .elementor-button.elementor-button-success:hover {
+  background-color: #e05a10;
+}
