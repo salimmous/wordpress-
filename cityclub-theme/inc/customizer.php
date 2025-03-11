@@ -201,6 +201,3 @@ function cityclub_customize_preview_js() {
     wp_enqueue_script( 'cityclub-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), CITYCLUB_VERSION, true );
 }
 add_action( 'customize_preview_init', 'cityclub_customize_preview_js' );
-
-/**
- *

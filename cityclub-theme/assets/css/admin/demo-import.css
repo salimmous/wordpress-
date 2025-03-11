@@ -1,0 +1,149 @@
+/**
+ * Demo Import Admin Styles
+ */
+
+.cityclub-demo-import-wrap {
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.cityclub-demo-import-container {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cityclub-demo-import-header {
+  display: flex;
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.cityclub-demo-preview {
+  width: 300px;
+  height: auto;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cityclub-demo-import-header-content {
+  padding-left: 30px;
+  flex: 1;
+}
+
+.cityclub-demo-import-header-content h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: #f26f21;
+}
+
+.cityclub-demo-import-plugins {
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.cityclub-demo-import-plugins h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.cityclub-plugin-list {
+  margin: 0;
+  padding: 0;
+}
+
+.cityclub-plugin-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cityclub-plugin-item:last-child {
+  border-bottom: none;
+}
+
+.cityclub-plugin-name {
+  font-weight: 500;
+}
+
+.cityclub-plugin-status-active {
+  color: #46b450;
+  font-weight: 500;
+}
+
+.cityclub-demo-import-actions {
+  padding: 30px;
+  text-align: center;
+}
+
+.cityclub-import-demo-button {
+  padding: 10px 25px !important;
+  height: auto !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  background-color: #f26f21 !important;
+  border-color: #f26f21 !important;
+}
+
+.cityclub-import-demo-button:hover {
+  background-color: #d85a12 !important;
+  border-color: #d85a12 !important;
+}
+
+.cityclub-import-progress {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.cityclub-import-progress-bar {
+  height: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.cityclub-import-progress-bar:before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 0;
+  background-color: #f26f21;
+  animation: progress 30s linear forwards;
+}
+
+@keyframes progress {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.cityclub-import-progress-message {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Responsive styles */
+@media (max-width: 782px) {
+  .cityclub-demo-import-header {
+    flex-direction: column;
+  }
+
+  .cityclub-demo-preview {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+  }
+
+  .cityclub-demo-import-header-content {
+    padding-left: 0;
+  }
+}
