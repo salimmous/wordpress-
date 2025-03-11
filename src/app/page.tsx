@@ -1,7 +1,6 @@
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return (
-    <div>
-    </div>
-  );
+export default function Home() {
+  redirect("/demo");
+  return null;
 }

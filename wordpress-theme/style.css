@@ -1,0 +1,15 @@
+/*
+Theme Name: CityClub Fitness Network
+Theme URI: https://cityclub.ma
+Author: Tempo AI
+Author URI: https://tempolabs.ai
+Description: A premium WordPress theme for CityClub fitness network with 50+ gym locations across Morocco.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cityclub
+Tags: fitness, gym, responsive, modern
+*/
+
+/* All styles are included in the compiled CSS file */
+@import "assets/css/style.css";

@@ -1,9 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "browser-sync start --proxy 'localhost' --files '**/*.php' 'assets/css/*.css' 'assets/js/*.js'",
+    "build": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/style.css --minify",
+    "start": "next start",
+    "watch": "tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/style.css --watch"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",
@@ -42,6 +43,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "browser-sync": "^3.0.3",
     "postcss": "^8",
     "tailwind-merge": "^2",
     "tailwindcss": "^3",

@@ -1,0 +1,160 @@
+/*! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com*/
+
+/* Base Tailwind styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom components */
+@layer components {
+  .container {
+    @apply mx-auto px-6;
+  }
+
+  .section-title {
+    @apply mb-16;
+  }
+
+  .section-subtitle {
+    @apply inline-block text-[#f26f21] font-semibold text-lg mb-2 relative;
+  }
+
+  .section-subtitle-line {
+    @apply absolute -bottom-1 left-0 w-12 h-1 bg-[#f26f21];
+  }
+
+  .section-title-center .section-subtitle-line {
+    @apply left-1/2 transform -translate-x-1/2 w-20;
+  }
+
+  .section-heading {
+    @apply text-4xl md:text-5xl font-extrabold mt-4 mb-4 leading-tight;
+  }
+
+  .section-heading-dark {
+    @apply text-gray-900;
+  }
+
+  .section-heading-light {
+    @apply text-white;
+  }
+
+  .section-description {
+    @apply max-w-2xl;
+  }
+
+  .section-description-dark {
+    @apply text-gray-600;
+  }
+
+  .section-description-light {
+    @apply text-white/80;
+  }
+
+  .section-title-center .section-description {
+    @apply mx-auto;
+  }
+
+  /* Button styles */
+  .btn {
+    @apply inline-block px-6 py-3 rounded-lg font-semibold transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-[#f26f21] text-white hover:bg-[#e05a10] shadow-lg shadow-[#f26f21]/20;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-gray-900 hover:bg-gray-100;
+  }
+
+  .btn-outline {
+    @apply bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100;
+  }
+
+  /* Stats card */
+  .stat-card {
+    @apply bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 h-full transform transition-all duration-300 group-hover:translate-y-[-10px] group-hover:shadow-xl group-hover:shadow-[#f26f21]/10;
+  }
+
+  /* Activity card */
+  .activity-card-image {
+    @apply relative h-56 overflow-hidden;
+  }
+
+  .activity-card-overlay {
+    @apply absolute inset-0 opacity-90 z-10;
+  }
+
+  .activity-card-content {
+    @apply absolute inset-0 flex items-center justify-center z-20;
+  }
+
+  .activity-card-icon {
+    @apply bg-white/20 backdrop-blur-sm p-3 rounded-full inline-block mb-4;
+  }
+
+  /* Membership plan card */
+  .plan-card {
+    @apply rounded-2xl overflow-hidden transition-all hover:shadow-2xl relative;
+  }
+
+  .plan-card-header {
+    @apply p-8 text-white relative overflow-hidden;
+  }
+
+  .plan-card-badge {
+    @apply absolute top-0 right-0 bg-white text-[#f26f21] text-xs font-bold uppercase px-4 py-1 rounded-bl-lg z-10;
+  }
+
+  .plan-card-price {
+    @apply flex items-baseline relative z-10;
+  }
+
+  .plan-card-features {
+    @apply space-y-4;
+  }
+
+  /* Coach card */
+  .coach-card {
+    @apply bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group border border-gray-100;
+  }
+
+  .coach-card-image {
+    @apply relative h-48 overflow-hidden bg-gradient-to-br from-[#f26f21]/80 to-[#e05a10]/80;
+  }
+
+  .coach-card-avatar {
+    @apply h-32 w-32 rounded-full border-4 border-white group-hover:scale-110 transition-transform duration-300;
+  }
+
+  /* Timeline step */
+  .timeline-step {
+    @apply flex;
+  }
+
+  .timeline-step-number {
+    @apply w-12 h-12 rounded-full bg-[#f26f21] flex items-center justify-center text-white font-bold;
+  }
+
+  .timeline-step-connector {
+    @apply w-0.5 h-16 bg-[#f26f21]/30 mx-auto my-2;
+  }
+
+  .timeline-step-content {
+    @apply bg-white/10 backdrop-blur-sm p-6 rounded-xl;
+  }
+
+  .timeline-step-icon {
+    @apply bg-[#f26f21]/20 p-2 rounded-lg text-white mr-3;
+  }
+}
