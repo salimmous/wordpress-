@@ -1,0 +1,436 @@
+/**
+ * CityClub Pro Demo Import Styles
+ */
+
+/* Main Container */
+.cityclub-pro-import-wrap {
+  max-width: 1200px;
+  margin: 20px auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #3c434a;
+}
+
+/* Header */
+.cityclub-pro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e4e7;
+}
+
+.cityclub-pro-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  color: #1d2327;
+}
+
+.cityclub-pro-version {
+  font-size: 14px;
+  color: #757575;
+  margin: 0;
+}
+
+/* Introduction */
+.cityclub-pro-intro {
+  margin-bottom: 40px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.cityclub-pro-intro p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-top: 0;
+}
+
+/* Notices */
+.cityclub-pro-notice {
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.cityclub-pro-notice p {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cityclub-pro-notice-warning {
+  background-color: #fcf9e8;
+  border-left: 4px solid #dba617;
+}
+
+.cityclub-pro-notice-info {
+  background-color: #f0f6fc;
+  border-left: 4px solid #72aee6;
+}
+
+/* Demo Grid */
+.cityclub-pro-demos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.cityclub-pro-demo {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cityclub-pro-demo:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.cityclub-pro-demo-preview {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+
+.cityclub-pro-demo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.cityclub-pro-demo:hover .cityclub-pro-demo-preview img {
+  transform: scale(1.05);
+}
+
+.cityclub-pro-demo-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+
+.cityclub-pro-demo:hover .cityclub-pro-demo-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cityclub-pro-demo-title {
+  padding: 20px 20px 10px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f26f21;
+}
+
+.cityclub-pro-demo-desc {
+  padding: 0 20px 20px;
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Buttons */
+.cityclub-pro-demo-preview-btn,
+.cityclub-pro-demo-import-btn,
+.cityclub-pro-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.cityclub-pro-demo-preview-btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.cityclub-pro-demo-preview-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.cityclub-pro-demo-import-btn,
+.cityclub-pro-btn-primary {
+  background-color: #f26f21;
+  color: #fff;
+}
+
+.cityclub-pro-demo-import-btn:hover,
+.cityclub-pro-btn-primary:hover {
+  background-color: #e05a10;
+}
+
+.cityclub-pro-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.cityclub-pro-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Import Modal */
+.cityclub-pro-import-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cityclub-pro-import-modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cityclub-pro-import-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s ease;
+}
+
+.cityclub-pro-import-modal-close:hover {
+  color: #f26f21;
+}
+
+.cityclub-pro-import-modal-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 15px;
+  color: #1d2327;
+}
+
+.cityclub-pro-import-modal-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  color: #666;
+}
+
+/* Progress Bar */
+.cityclub-pro-import-progress {
+  margin-bottom: 30px;
+}
+
+.cityclub-pro-import-progress-bar {
+  height: 10px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.cityclub-pro-import-progress-bar-inner {
+  height: 100%;
+  width: 0;
+  background: #f26f21;
+  transition: width 0.3s ease;
+}
+
+.cityclub-pro-import-progress-message {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Import Steps */
+.cityclub-pro-import-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.cityclub-pro-import-steps::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #f0f0f0;
+  z-index: 1;
+}
+
+.cityclub-pro-import-step {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.cityclub-pro-import-step-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  margin: 0 auto 10px;
+  position: relative;
+}
+
+.cityclub-pro-import-step.active .cityclub-pro-import-step-icon {
+  background: #f26f21;
+}
+
+.cityclub-pro-import-step.completed .cityclub-pro-import-step-icon::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 14px;
+}
+
+.cityclub-pro-import-step-title {
+  font-size: 13px;
+  color: #666;
+  display: block;
+}
+
+.cityclub-pro-import-step.active .cityclub-pro-import-step-title {
+  color: #f26f21;
+  font-weight: 500;
+}
+
+.cityclub-pro-import-step.completed .cityclub-pro-import-step-title {
+  color: #46b450;
+  font-weight: 500;
+}
+
+/* Complete & Error States */
+.cityclub-pro-import-complete,
+.cityclub-pro-import-error {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.cityclub-pro-import-complete-icon,
+.cityclub-pro-import-error-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+.cityclub-pro-import-complete-icon {
+  background: #46b450;
+}
+
+.cityclub-pro-import-error-icon {
+  background: #dc3232;
+}
+
+.cityclub-pro-import-complete-icon::after,
+.cityclub-pro-import-error-icon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 30px;
+}
+
+.cityclub-pro-import-complete-icon::after {
+  content: "✓";
+}
+
+.cityclub-pro-import-error-icon::after {
+  content: "✕";
+}
+
+.cityclub-pro-import-complete h3,
+.cityclub-pro-import-error h3 {
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.cityclub-pro-import-complete p,
+.cityclub-pro-import-error p,
+.cityclub-pro-import-error-message {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.cityclub-pro-import-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 782px) {
+  .cityclub-pro-demos {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .cityclub-pro-import-steps {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .cityclub-pro-import-step {
+    flex: 0 0 33.333%;
+    margin-bottom: 20px;
+  }
+
+  .cityclub-pro-import-steps::before {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .cityclub-pro-import-step {
+    flex: 0 0 50%;
+  }
+
+  .cityclub-pro-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cityclub-pro-version {
+    margin-top: 5px;
+  }
+}

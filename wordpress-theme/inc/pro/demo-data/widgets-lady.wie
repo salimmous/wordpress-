@@ -1,0 +1,44 @@
+{
+    "sidebar-1": {
+        "search-2": {
+            "title": "Search"
+        },
+        "recent-posts-2": {
+            "title": "Recent Posts",
+            "number": 5
+        },
+        "categories-2": {
+            "title": "Categories",
+            "count": 1,
+            "hierarchical": 1,
+            "dropdown": 0
+        }
+    },
+    "footer-1": {
+        "text-2": {
+            "title": "À propos de CityClub Lady",
+            "text": "CityClub Lady est le premier réseau de fitness 100% féminin au Maroc avec plus de 20 clubs à travers le pays. Notre mission est de rendre le fitness accessible à toutes les femmes.",
+            "filter": true
+        }
+    },
+    "footer-2": {
+        "nav_menu-2": {
+            "title": "Liens rapides",
+            "nav_menu": 2
+        }
+    },
+    "footer-3": {
+        "text-3": {
+            "title": "Horaires d'ouverture",
+            "text": "Lundi - Vendredi: 6h - 23h\r\nSamedi: 8h - 22h\r\nDimanche: 8h - 20h\r\nJours fériés: 10h - 18h",
+            "filter": true
+        }
+    },
+    "footer-4": {
+        "text-4": {
+            "title": "Contact",
+            "text": "<i class=\"fas fa-map-marker-alt\"></i> Siège social: 123 Avenue Mohammed V, Casablanca\r\n\r\n<i class=\"fas fa-phone\"></i> Téléphone: +212 522 123 456\r\n\r\n<i class=\"fas fa-envelope\"></i> Email: contact@cityclublady.ma",
+            "filter": true
+        }
+    }
+}

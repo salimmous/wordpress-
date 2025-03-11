@@ -714,16 +714,20 @@ add_filter('theme_page_templates', 'cityclub_add_page_templates');
 
 /**
  * Add custom body classes
+ * 
+ * @see inc/template-functions.php for more body classes
  */
-function cityclub_body_classes($classes) {
-    // Add a class if we're on the home page
-    if (is_front_page()) {
-        $classes[] = 'cityclub-home';
+if (!function_exists('cityclub_body_classes')) {
+    function cityclub_body_classes($classes) {
+        // Add a class if we're on the home page
+        if (is_front_page()) {
+            $classes[] = 'cityclub-home';
+        }
+        
+        return $classes;
     }
-    
-    return $classes;
+    add_filter('body_class', 'cityclub_body_classes');
 }
-add_filter('body_class', 'cityclub_body_classes');
 
 /**
  * Custom template tags for this theme.

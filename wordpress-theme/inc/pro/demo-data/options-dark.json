@@ -1,0 +1,19 @@
+{
+  "cityclub_theme_version": "1.0.0",
+  "cityclub_installed_demos": ["dark"],
+  "elementor_disable_color_schemes": "yes",
+  "elementor_disable_typography_schemes": "yes",
+  "elementor_container_width": "1200",
+  "elementor_space_between_widgets": "20",
+  "elementor_page_title_selector": "h1.entry-title",
+  "elementor_global_image_lightbox": "yes",
+  "elementor_stretched_section_container": "body",
+  "cityclub_social_facebook": "https://facebook.com/cityclub",
+  "cityclub_social_twitter": "https://twitter.com/cityclub",
+  "cityclub_social_instagram": "https://instagram.com/cityclub",
+  "cityclub_social_youtube": "https://youtube.com/cityclub",
+  "cityclub_contact_phone": "+212 522 123 456",
+  "cityclub_contact_email": "contact@cityclub.ma",
+  "cityclub_contact_address": "123 Boulevard Mohammed V, Casablanca, Maroc",
+  "cityclub_dark_mode": "enabled"
+}

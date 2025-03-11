@@ -6,149 +6,108 @@
  */
 
 /**
- * Adds custom classes to the array of body classes.
+ * Add custom classes to the array of body classes.
  *
  * @param array $classes Classes for the body element.
- * @return array
+ * @return array Modified body classes.
  */
-function cityclub_body_classes( $classes ) {
-	// Adds a class of hfeed to non-singular pages.
-	if ( ! is_singular() ) {
-		$classes[] = 'hfeed';
-	}
-
-	// Adds a class if we're on the home page.
-	if ( is_front_page() ) {
-		$classes[] = 'cityclub-home';
-	}
-
-	// Adds a class if we're on a single post.
-	if ( is_single() ) {
-		$classes[] = 'cityclub-single';
-	}
-
-	// Adds a class if we're on a page.
-	if ( is_page() ) {
-		$classes[] = 'cityclub-page';
-	}
-
-	// Adds a class if we're on an archive page.
-	if ( is_archive() ) {
-		$classes[] = 'cityclub-archive';
-	}
-
-	// Adds a class if we're on a search page.
-	if ( is_search() ) {
-		$classes[] = 'cityclub-search';
-	}
-
-	// Adds a class if we're on a 404 page.
-	if ( is_404() ) {
-		$classes[] = 'cityclub-404';
-	}
-
-	return $classes;
+function cityclub_body_classes_template( $classes ) {
+    // Add a class if we're on the home page
+    if ( is_front_page() ) {
+        $classes[] = 'cityclub-home';
+    }
+    
+    // Add class if no sidebar is present
+    if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+        $classes[] = 'no-sidebar';
+    }
+    
+    // Add class for different page templates
+    if ( is_page_template( 'template-home.php' ) ) {
+        $classes[] = 'template-home';
+    }
+    
+    return $classes;
 }
-add_filter( 'body_class', 'cityclub_body_classes' );
+add_filter( 'body_class', 'cityclub_body_classes_template' );
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
 function cityclub_pingback_header() {
-	if ( is_singular() && pings_open() ) {
-		printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
-	}
+    if ( is_singular() && pings_open() ) {
+        printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
+    }
 }
 add_action( 'wp_head', 'cityclub_pingback_header' );
 
 /**
- * Enqueue Font Awesome.
- */
-function cityclub_enqueue_font_awesome() {
-	wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', array(), '5.15.4' );
-}
-add_action( 'wp_enqueue_scripts', 'cityclub_enqueue_font_awesome' );
-
-/**
- * Add custom CSS variables for theme colors.
- */
-function cityclub_custom_css_variables() {
-	$primary_color = get_theme_mod( 'cityclub_primary_color', '#f26f21' );
-	$secondary_color = get_theme_mod( 'cityclub_secondary_color', '#000000' );
-	$text_color = get_theme_mod( 'cityclub_text_color', '#333333' );
-	$light_color = get_theme_mod( 'cityclub_light_color', '#f8f8f8' );
-	$dark_color = get_theme_mod( 'cityclub_dark_color', '#222222' );
-
-	$css = ":root {\n";
-	$css .= "\t--primary-color: {$primary_color};\n";
-	$css .= "\t--secondary-color: {$secondary_color};\n";
-	$css .= "\t--text-color: {$text_color};\n";
-	$css .= "\t--light-color: {$light_color};\n";
-	$css .= "\t--dark-color: {$dark_color};\n";
-	$css .= "}\n";
-
-	wp_add_inline_style( 'cityclub-style', $css );
-}
-add_action( 'wp_enqueue_scripts', 'cityclub_custom_css_variables' );
-
-/**
- * Add preconnect for Google Fonts.
+ * Adds custom classes to the array of post classes.
  *
- * @param array  $urls           URLs to print for resource hints.
- * @param string $relation_type  The relation type the URLs are printed.
- * @return array $urls           URLs to print for resource hints.
+ * @param array $classes Classes for the post element.
+ * @return array Modified post classes.
  */
-function cityclub_resource_hints( $urls, $relation_type ) {
-	if ( wp_style_is( 'cityclub-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
-		$urls[] = array(
-			'href' => 'https://fonts.gstatic.com',
-			'crossorigin',
-		);
-	}
-
-	return $urls;
+function cityclub_post_classes( $classes ) {
+    // Add a class if post has a featured image
+    if ( has_post_thumbnail() ) {
+        $classes[] = 'has-thumbnail';
+    }
+    
+    return $classes;
 }
-add_filter( 'wp_resource_hints', 'cityclub_resource_hints', 10, 2 );
+add_filter( 'post_class', 'cityclub_post_classes' );
 
 /**
- * Add a title to posts and pages that are missing titles.
+ * Modify the "read more" link text
  *
- * @param string $title The title.
- * @return string
+ * @return string Modified read more link.
  */
-function cityclub_untitled_post( $title ) {
-	// If the title is empty, return a default title.
-	if ( '' === $title ) {
-		return __( 'Untitled', 'cityclub' );
-	}
-
-	return $title;
+function cityclub_read_more_link() {
+    return '<a class="more-link" href="' . get_permalink() . '">' . esc_html__( 'Lire la suite', 'cityclub' ) . ' <i class="fas fa-arrow-right"></i></a>';
 }
-add_filter( 'the_title', 'cityclub_untitled_post' );
+add_filter( 'the_content_more_link', 'cityclub_read_more_link' );
 
 /**
- * Implement the Custom Header feature.
+ * Modify the excerpt length
+ *
+ * @param int $length Excerpt length.
+ * @return int Modified excerpt length.
  */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require get_template_directory() . '/inc/template-functions.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
+function cityclub_excerpt_length( $length ) {
+    return 20;
 }
+add_filter( 'excerpt_length', 'cityclub_excerpt_length' );
+
+/**
+ * Modify the excerpt more string
+ *
+ * @param string $more The string shown within the more link.
+ * @return string Modified excerpt more string.
+ */
+function cityclub_excerpt_more( $more ) {
+    return '...';
+}
+add_filter( 'excerpt_more', 'cityclub_excerpt_more' );
+
+/**
+ * Add a wrapper around embedded media
+ *
+ * @param string $html The HTML output for the embedded element.
+ * @return string The modified HTML output.
+ */
+function cityclub_embed_html( $html ) {
+    return '<div class="responsive-embed">' . $html . '</div>';
+}
+add_filter( 'embed_oembed_html', 'cityclub_embed_html', 10, 3 );
+add_filter( 'video_embed_html', 'cityclub_embed_html' ); // Jetpack
+
+/**
+ * Add a container around the gallery
+ *
+ * @param string $html The gallery output.
+ * @return string The modified gallery output.
+ */
+function cityclub_gallery_wrapper( $html ) {
+    return '<div class="gallery-container">' . $html . '</div>';
+}
+add_filter( 'post_gallery', 'cityclub_gallery_wrapper', 10, 2 );
