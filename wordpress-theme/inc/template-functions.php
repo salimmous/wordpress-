@@ -11,7 +11,7 @@
  * @param array $classes Classes for the body element.
  * @return array Modified body classes.
  */
-function cityclub_body_classes_template( $classes ) {
+function cityclub_body_classes_inc( $classes ) {
     // Add a class if we're on the home page
     if ( is_front_page() ) {
         $classes[] = 'cityclub-home';
@@ -29,7 +29,7 @@ function cityclub_body_classes_template( $classes ) {
     
     return $classes;
 }
-add_filter( 'body_class', 'cityclub_body_classes_template' );
+add_filter( 'body_class', 'cityclub_body_classes_inc' );
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
